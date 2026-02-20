@@ -59,9 +59,9 @@ async def get_latency_metrics(request: Request):
         breaches = int(np.sum(latencies > threshold))
 
         results[region] = {
-            "avg_latency": round(avg_latency, 3),
-            "p95_latency": round(p95_latency, 3),
-            "avg_uptime": round(avg_uptime, 3),
+            "avg_latency": avg_latency,
+            "p95_latency": p95_latency,
+            "avg_uptime": avg_uptime,
             "breaches": breaches
         }
 
