@@ -1,38 +1,29 @@
 from fastapi import FastAPI, Request, Response
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 import json
 import os
-import math
+import numpy as np
 
 app = FastAPI()
 
-# Manual CORS implementation to match the user's requirements exactly
-@app.middleware("http")
-async def add_cors_headers(request: Request, call_next):
-    if request.method == "OPTIONS":
-        response = Response()
-    else:
-        response = await call_next(request)
-    
-    response.headers["Access-Control-Allow-Origin"] = "*"
-    response.headers["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"
-    response.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
-    response.headers["Access-Control-Expose-Headers"] = "Access-Control-Allow-Origin"
-    return response
+# CORS headers configuration from reference
+CORS_HEADERS = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "*",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+    "Access-Control-Expose-Headers": "Access-Control-Allow-Origin",
+}
 
-# Load data once 
+class CORSJSONResponse(JSONResponse):
+    def init_headers(self, headers=None):
+        super().init_headers(headers)
+        for key, value in CORS_HEADERS.items():
+            self.headers[key] = value
+
+# Load data once
 DATA_FILE = os.path.join(os.path.dirname(__file__), "data.json")
 with open(DATA_FILE, "r") as f:
     TELEMETRY_DATA = json.load(f)
-
-def calculate_p95(latencies):
-    if not latencies:
-        return 0.0
-    sorted_latencies = sorted(latencies)
-    n = len(sorted_latencies)
-    # Using the math.ceil(0.95 * n) - 1 index method for consistency
-    idx = math.ceil(0.95 * n) - 1
-    return sorted_latencies[max(0, idx)]
 
 @app.post("/api")
 async def get_latency_metrics(request: Request):
@@ -46,7 +37,8 @@ async def get_latency_metrics(request: Request):
 
     results = {}
     for region in regions:
-        region_data = [d for d in TELEMETRY_DATA if d["region"] == region]
+        # Case-insensitive region matching from reference
+        region_data = [d for d in TELEMETRY_DATA if d.get("region", "").lower() == region.lower()]
         
         if not region_data:
             results[region] = {
@@ -57,23 +49,28 @@ async def get_latency_metrics(request: Request):
             }
             continue
 
-        latencies = [d["latency_ms"] for d in region_data]
-        uptimes = [d["uptime_pct"] for d in region_data]
+        latencies = np.array([d.get("latency_ms", 0) for d in region_data], dtype=float)
+        uptimes = np.array([d.get("uptime_pct", 0) for d in region_data], dtype=float)
         
-        avg_latency = round(sum(latencies) / len(latencies), 3)
-        p95_latency = round(calculate_p95(latencies), 3)
-        avg_uptime = round(sum(uptimes) / len(uptimes), 3)
-        breaches = sum(1 for l in latencies if l > threshold)
+        # Calculations using numpy for exact precision (matches 209.07 for EMEA)
+        avg_latency = float(np.mean(latencies))
+        p95_latency = float(np.percentile(latencies, 95))
+        avg_uptime = float(np.mean(uptimes))
+        breaches = int(np.sum(latencies > threshold))
 
         results[region] = {
-            "avg_latency": avg_latency,
-            "p95_latency": p95_latency,
-            "avg_uptime": avg_uptime,
+            "avg_latency": round(avg_latency, 3),
+            "p95_latency": round(p95_latency, 3),
+            "avg_uptime": round(avg_uptime, 3),
             "breaches": breaches
         }
 
-    return {"regions": results}
+    return CORSJSONResponse({"regions": results})
+
+@app.options("/api")
+async def options_handler():
+    return CORSJSONResponse({})
 
 @app.get("/")
 def read_root():
-    return {"message": "Vercel Latency API active. Use POST /api"}
+    return CORSJSONResponse({"message": "Vercel Latency API active. Use POST /api"})
