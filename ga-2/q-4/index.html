@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TDS GA-2 Showcase | 24DS1000061</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --background: #0f172a;
+            --surface: rgba(30, 41, 59, 0.7);
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--background);
+            background-image: radial-gradient(circle at top right, rgba(99, 102, 241, 0.1), transparent),
+                              radial-gradient(circle at bottom left, rgba(168, 85, 247, 0.1), transparent);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .badge {
+            background: var(--surface);
+            padding: 0.5rem 1rem;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--text-dim);
+            font-size: 0.875rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            backdrop-filter: blur(12px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        h2 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        h2::before {
+            content: '';
+            width: 4px;
+            height: 1.5rem;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        p {
+            color: var(--text-dim);
+        }
+
+        code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.375rem;
+            color: #d1d5db;
+            font-family: 'Fira Code', 'Monaco', monospace;
+            font-size: 0.9em;
+        }
+
+        .footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-dim);
+            font-size: 0.875rem;
+        }
+
+        .email-container {
+            margin: 1rem 0;
+            padding: 0.75rem;
+            background: rgba(99, 102, 241, 0.1);
+            border-radius: 0.75rem;
+            display: inline-block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .step-list li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>GA-2 Weekly Assignment</h1>
+            <div class="badge">Tools in Data Science (TDS)</div>
+        </header>
+
+        <section class="card">
+            <h2>Question 2: Git History Rewriting</h2>
+            <p>Cleaning sensitive data from a repository history and establishing security guardrails.</p>
+            <ul class="step-list">
+                <li>Purged <code>.env</code> file from the entire commit history.</li>
+                <li>Used <code>git filter-branch</code> to ensure complete removal.</li>
+                <li>Implemented <code>.gitignore</code> and <code>.env.example</code> best practices.</li>
+            </ul>
+        </section>
+
+        <section class="card">
+            <h2>Question 3: Git Time Travel</h2>
+            <p>Navigating the commit graph to identify specific configuration changes.</p>
+            <ul class="step-list">
+                <li>Located the commit that modified <code>config.json</code> (timeout: 90).</li>
+                <li>Identified Target Commit: <code>c015716</code></li>
+                <li>Identified Parent Commit: <code>06d25d2</code></li>
+            </ul>
+        </section>
+
+        <div class="footer">
+            <div class="email-container">
+                Contact: <!--email_off-->24ds1000061@ds.study.iitm.ac.in<!--/email_off-->
+            </div>
+            <div>&copy; 2026 | TDS GA-2 Submission</div>
+        </div>
+    </div>
+</body>
+</html>
