@@ -12,3 +12,11 @@
 - **Search:** Found the change in commit `c015716` ("Update timeout settings").
 - **Parent:** Checked parent using `git log -1 --format=%P c015716`.
 - **Answer:** The parent commit short hash is **`06d25d2`**.
+
+## Question 5: Static API (StaticShop)
+**Task:** Create a static JSON product catalog hosted on GitHub Pages.
+- **Metadata:** Included email and version `3c99b79e`.
+- **Products:** Populated 17 products with IDs, categories, and pricing.
+- **Aggregations:** Computed category-level stats.
+  - **Sports:** Count: 1, Inventory Value: **29180.97**.
+- **URL:** [https://24ds1000061.github.io/TDS/ga-2/q-5/products.json](https://24ds1000061.github.io/TDS/ga-2/q-5/products.json)
