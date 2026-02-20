@@ -24,6 +24,4 @@ jobs:
           key: cache-5d24ba9
 
       - name: prime-cache-5d24ba9
-        run: |
-          echo "Cache hit result: ${{ steps.cache-step.outputs.cache-hit }}"
-          echo "Finished step for 24ds1000061@ds.study.iitm.ac.in"
+        run: echo "cache-hit=${{ steps.cache-step.outputs.cache-hit }}"
