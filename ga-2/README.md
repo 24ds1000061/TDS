@@ -30,3 +30,10 @@
 - **Workflow:** Created `.github/workflows/verify_email.yml`.
 - **Step Name:** `24ds1000061@ds.study.iitm.ac.in`.
 - **Repo URL:** [https://github.com/24ds1000061/TDS](https://github.com/24ds1000061/TDS)
+
+## Question 7: CI Caching
+**Task:** Speed up CI with GitHub Actions caching using `actions/cache@v4`.
+- **Workflow:** Created `.github/workflows/cache_check.yml`.
+- **Cache Key:** `cache-5d24ba9`.
+- **Step Name:** `prime-cache-5d24ba9` (echoes cache status).
+- **Repo URL:** [https://github.com/24ds1000061/TDS](https://github.com/24ds1000061/TDS)
