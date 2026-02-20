@@ -15,7 +15,7 @@
 - **Answer:** The parent commit short hash is **`06d25d2`**.
 ## Question 4: Git page
 **Task:** git pages
-- **Result:** [`The `feature` branch is now based on the `master` branch`](https://24ds1000061.github.io/home-app/).
+- **Result:** [GA-2 Showcase Page](https://24ds1000061.github.io/TDS/ga-2/q-4/)
 
 ## Question 5: Static API (StaticShop)
 **Task:** Create a static JSON product catalog hosted on GitHub Pages.
