@@ -50,3 +50,11 @@
 - **Dockerfile:** Created in `ga-2/q-9/`.
 - **Workflow:** `.github/workflows/docker_q9.yml`.
 - **Image URL:** [https://hub.docker.com/repository/docker/parasuramaniitm/tds-q9/general](https://hub.docker.com/repository/docker/parasuramaniitm/tds-q9/general)
+
+## Question 10: Hugging Face Spaces (Docker SDK)
+**Task:** Deploy a containerized API to Hugging Face Spaces.
+- **Space Name:** `ga2-a34366`
+- **SDK:** Docker
+- **Config:** Port 7007, UID 1000 user.
+- **Description:** Included `deployment-ready-ga2-a34366`.
+- **URL:** [https://huggingface.co/spaces/ParasuramanIITM/ga2-a34366](https://huggingface.co/spaces/ParasuramanIITM/ga2-a34366)
